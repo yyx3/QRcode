@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>独享节点</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="./css/ab32664529ebff6a.css" crossorigin="" data-precedence="next" />
+		<link rel="stylesheet" href="./css/19e8bb2190bce99d.css" crossorigin="" data-precedence="next" />
+		<link rel="stylesheet" href="./css/style.css"> <!-- 引入外部样式表 -->
+		<script src="./js/md5.min.js"></script>
+		<script src="./js/script.js"></script>
+		<script src='./js/disable-devtool.js'></script>
+		<script>
+			DisableDevtool({
+				ondevtoolopen: (type) => {
+					const info = '禁止使用F12开发者工具';
+					alert(info);
+				},
+			})
+		</script>
+		<meta name="description" content="疯果科技" />
+		<link rel="icon" href="./images/feng.ico" type="image/x-icon" sizes="16x16" />
+		<meta name="next-size-adjust" />
+	</head>
+	<body class="__className_aaf875">
+		<div class="container" id="passwordContainer">
+			<h1 style="font-weight: bold;">⚠️此页面需要密码才能正常访问⚠️</h1>
+			<input type="password" id="password" placeholder="请输入密码">
+			<button onclick="checkPassword()">确认</button>
+		</div>
+
+		<div id="content" style="display:none;">
+			<!-- 这里放置需要显示的内容 -->
+			<main class="flex min-h-screen flex-col items-center gap-5 p-5 bg-violet-400">
+				<!-- 			模块一 -->
+				<div class="bg-violet-500 w-5/6 rounded-2xl p-2 pl-5">
+					<div class="flex flex-wrap gap-2 p-6">
+						<div class="flex gap-3">
+							<div class="flex rounded-2xl p-2 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300"
+								style="background-color:white">
+								<div class="m-auto" style="color:blue">
+									<div> <img src='du.jpg' width='50%' heigth='50%' style="display: block; margin: auto;"> </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end -->
+		</div>
+		</main>
+		<!-- 	end -->
+
+		<script>
+			function checkPassword() {
+				var password = document.getElementById("password").value;
+				var encryptedPassword = md5(password);
+
+				if (encryptedPassword === "93d28a87ce98398205948224593413e9") {
+					document.getElementById("passwordContainer").style.display = "none";
+					document.getElementById("content").style.display = "block";
+				} else {
+					alert("密码错误，请重新输入！");
+				}
+			}
+		</script>
+	</body>
+</html>
