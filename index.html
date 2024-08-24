@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>禁止微信浏览器打开</title>
+    				<script src='./js/disable-devtool.js'></script>
+		<script>
+			DisableDevtool({
+				ondevtoolopen: (type) => {
+					const info = '禁止使用F12开发者工具';
+					alert(info);
+				},
+			})
+		</script>
     <style>
         body {
             font-family: Arial, sans-serif;
