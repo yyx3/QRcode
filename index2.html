@@ -1,192 +1,109 @@
-<!DOCTYPE html><html>
-    <head>
-<meta charset="utf-8">
-    
-    <meta name="Author" content="Noah">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Noah">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>禁止微信打开</title>
     <link href="css/style.css" rel="stylesheet">
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>禁止微信打开</title>
-	    <style>
-	        body {
-	            font-family: Arial, sans-serif;
-	            text-align: center;
-	            margin: 0;  /* 确保没有默认的边距 */
-	        }
-	        .warning {
-	            display: none;
-	        }
-	        .visible {
-	            display: block;
-	        }
-	        img {
-	            width: 100%;
-	            height: auto;
-	        }
-	        .buttons {
-	            margin: 20px 0;
-	        }
-	        .button {
-	            display: inline-block;
-	            padding: 10px 20px;
-	            margin: 10px;
-	            font-size: 16px;
-	            color: #fff;
-	            background-color: #007bff;
-	            text-decoration: none;
-	            border-radius: 5px;
-	            transition: background-color 0.3s;
-	        }
-	        .button:hover {
-	            background-color: #0056b3;
-	        }
-	    </style>
-	    <script>
-	        function isWeChatBrowser() {
-	            var ua = navigator.userAgent.toLowerCase();
-	            return ua.indexOf('micromessenger') !== -1;
-	        }
-	
-	        function handleRedirect() {
-	            if (isWeChatBrowser()) {
-	                document.getElementById('warning').classList.add('visible');
-	            } else {
-	                document.getElementById('redirect').classList.add('visible');
-	            }
-	        }
-	
-	        window.onload = handleRedirect;
-	    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        .warning, .visible {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function isWeChatBrowser() {
+            return /micromessenger/i.test(navigator.userAgent);
+        }
+
+        function handleRedirect() {
+            if (isWeChatBrowser()) {
+                document.getElementById('warning').classList.add('visible');
+            } else {
+                document.getElementById('redirect').classList.add('visible');
+            }
+        }
+
+        window.onload = handleRedirect;
+    </script>
 </head>
 <body>
 <div id="all">
-<div class="wrapper"><div class="main">
+    <div class="wrapper">
+        <div class="main">
+            <br>
+            <div class="content">
+                <div class="content-top">
+                    <div class="box mdui-shadow-3">
+                        <ul class="speedlist">
+                            <li>
+                                <div class="link">
+                                    <div><b>下单网站①</b></div>
+                                    <div class="go"><a href="https://vpp.fenguosuxiaonline.top/" target="_blank">点击进入</a></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="link">
+                                    <div><b>下单网站②</b></div>
+                                    <div class="go"><a href="https://www.suxavpnonline.shop/" target="_blank">点击进入</a></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="link">
+                                    <div><b>在线客服①</b></div>
+                                    <div class="go"><a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" target="_blank">点击进入</a></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="link">
+                                    <div><b>在线客服②</b></div>
+                                    <div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="link">
+                                    <div><b>微信客服</b></div>
+                                    <div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-<br><div class="content"><div class="content-top"><div class="box mdui-shadow-3">
-<ul class="speedlist">
-                          
-<li><div class="link"><div><b>下单网站①</b></div>
-<div class="go"><a href="https://vpp.fenguosuxiaonline.top/" target="_blank">点击进入</a></div></div></li>
-<li><div class="link"><div><b>下单网站②</b></div>
-<div class="go"><a href="https://www.suxavpnonline.shop/" target="_blank">点击进入</a></div></div></li>
-
-<li><div class="link"><div><b>在线客服①</b></div>
-<div class="go"><a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" target="_blank">点击进入</a></div></div></li>
-
-<li><div class="link"><div><b>在线客服②</b></div>
-<div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div></div></li>
-
-<li><div class="link"><div><b>微信客服</b></div>
-<div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div></div></li>
-
-</ul></div></div></div>
-				
-
-<script>//禁止F12
-function fuckyou(){
-window.close(); //关闭当前窗口(防抽)
-window.location="about:blank"; //将当前窗口跳转置空白页
-}
-function click(e) {if (document.all) {if (event.button==2||event.button==3) { alert("欢迎光临寒舍，有什么需要帮忙的话，请与站长联系！谢谢您的合作！！！");
-oncontextmenu='return false';}}
-if (document.layers) {
-if (e.which == 3) {
-oncontextmenu='return false';}}}
-if (document.layers) {
-fuckyou();
-document.captureEvents(Event.MOUSEDOWN);
-}
-document.onmousedown=click;
-document.oncontextmenu = new Function("return false;")
-document.onkeydown =document.onkeyup = document.onkeypress=function(){ 
-if(window.event.keyCode == 123) { 
-fuckyou();
-window.event.returnValue=false;
-return(false);}}</script>
-
-<script>
-//屏蔽右键菜单 
-document.oncontextmenu = function(event) {
-if (window.event) {
-event = window.event;
-}
-
-try {
-var the = event.srcElement;
-if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-return false;
-}
-return true;
-} catch (e) {
-return false;
-}
-}
-
-//屏蔽粘贴 
-document.onpaste = function(event) { 
-if (window.event) {
-event = window.event;
-}
-try {
-var the = event.srcElement;
-if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-return false;
-}
-return true; 
-} catch (e) {
-return false;
-}
-}
-
-//屏蔽复制
-document.oncopy = function(event) {
-if (window.event) {
-event = window.event;
-}
-try {
-var the = event.srcElement;
-if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-return false;
-}
-return true;
-} catch (e) {
-return false;
-}
-}
-
-//屏蔽剪切
-document.oncut = function(event) {
-if (window.event) { 
-event = window.event;
-}
-try {
-var the = event.srcElement;
-if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-return false;
-}
-return true;
-} catch (e) {
-return false;
-}
-}
-
-//屏蔽选中
-document.onselectstart = function(event) {
-if (window.event) {
-event = window.event;
-}
-try {
-var the = event.srcElement;
-if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-return false;
-}
-return true;
-} catch (e) {
-return false;
-}
-}
-</script>
-</div></body></html>
+            <!-- 防止默认行为的脚本删除了。保持用户体验的同时，代码更简洁 -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
