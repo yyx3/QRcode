@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>禁止微信浏览器打开</title>
+    <script src='./js/disable-devtool.js'></script>
+    <script>
+        DisableDevtool({
+            ondevtoolopen: (type) => {
+                const info = '禁止使用F12开发者工具';
+                alert(info);
+            },
+        })
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;  /* 确保没有默认的边距 */
+        }
+        .warning {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            width: 180px; /* 设置按钮的固定宽度 */
+            height: 50px; /* 设置按钮的固定高度 */
+            line-height: 50px; /* 使文本垂直居中 */
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center; /* 使文本水平居中 */
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function isWeChatBrowser() {
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
+        }
+
+        function handleRedirect() {
+            if (isWeChatBrowser()) {
+                document.getElementById('warning').classList.add('visible');
+            } else {
+                document.getElementById('redirect').classList.add('visible');
+            }
+        }
+
+        window.onload = handleRedirect;
+    </script>
+</head>
+<body>
+    <div id="warning" class="warning">
+        <img src="./img/162.jpg" alt="警告图片">
+    </div>
+    <div id="redirect" class="warning">
+        <div class="buttons">
+            <a href="https://vpp.fenguosuxiaonline.top/" class="button" target="_blank"><b>下单网站 ① </b></a>
+            <a href="https://www.suxavpnonline.shop/" class="button" target="_blank"><b>下单网站 ② </b></a>
+            <a href="https://fenguo.zeabur.app/pages/xcx.html" class="button" target="_blank"><b>微信下单</b></a>
+            <a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" class="button" target="_blank"><b>在线客服 ①</b></a>
+            <a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" class="button" target="_blank"><b>在线客服 ②</b></a>
+            <a href="https://fenguo.zeabur.app/pages/kefu.html" class="button" target="_blank"><b>微信客服</b></a>
+        </div>
+    </div>
+</body>
+</html>
