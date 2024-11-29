@@ -32,18 +32,12 @@
         .buttons {
             margin: 20px 0;
         }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-        }
         .button {
             display: inline-block;
-            width: 180px;
+            width: 300px; /* 设置按钮宽度以适应延迟文本 */
             height: 50px;
             line-height: 50px;
-            margin-right: 10px;
+            margin: 10px;
             font-size: 16px;
             color: #fff;
             background-color: #007bff;
@@ -54,10 +48,6 @@
         }
         .button:hover {
             background-color: #0056b3;
-        }
-        .latency {
-            font-size: 14px;
-            color: #555;
         }
     </style>
     <script>
@@ -77,11 +67,11 @@
 
         function testLatency() {
             const websites = [
-                { url: "https://vpp.fenguosuxiaonline.top/", id: "latency-1" },
-                { url: "https://www.suxavpnonline.shop/", id: "latency-2" },
-                { url: "http://www.payvpp.top/", id: "latency-3" },
-                { url: "https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me", id: "latency-4" },
-                { url: "https://qm.qq.com/q/yqhXwi231C", id: "latency-5" },
+                { url: "https://vpp.fenguosuxiaonline.top/", id: "button-1", name: "下单网站 ①" },
+                { url: "https://www.suxavpnonline.shop/", id: "button-2", name: "下单网站 ②" },
+                { url: "http://www.payvpp.top/", id: "button-3", name: "下单网站 ③" },
+                { url: "https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me", id: "button-4", name: "在线客服" },
+                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-5", name: "QQ客服" },
             ];
 
             websites.forEach(site => {
@@ -90,10 +80,10 @@
                     .then(() => {
                         const endTime = performance.now(); // 获取结束时间
                         const latency = Math.round(endTime - startTime); // 计算延迟
-                        document.getElementById(site.id).innerText = `延迟: ${latency} ms`;
+                        document.getElementById(site.id).innerText = `${site.name} - 延迟: ${latency} ms`;
                     })
                     .catch(() => {
-                        document.getElementById(site.id).innerText = "延迟: 测试失败";
+                        document.getElementById(site.id).innerText = `${site.name} - 延迟: 测试失败`;
                     });
             });
         }
@@ -107,26 +97,11 @@
     </div>
     <div id="redirect" class="warning">
         <div class="buttons">
-            <div class="button-container">
-                <a href="https://vpp.fenguosuxiaonline.top/" class="button" target="_blank"><b>下单网站 ①</b></a>
-                <span class="latency" id="latency-1">延迟: 测试中...</span>
-            </div>
-            <div class="button-container">
-                <a href="https://www.suxavpnonline.shop/" class="button" target="_blank"><b>下单网站 ②</b></a>
-                <span class="latency" id="latency-2">延迟: 测试中...</span>
-            </div>
-            <div class="button-container">
-                <a href="http://www.payvpp.top/" class="button" target="_blank"><b>下单网站 ③</b></a>
-                <span class="latency" id="latency-3">延迟: 测试中...</span>
-            </div>
-            <div class="button-container">
-                <a href="https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me" class="button" target="_blank"><b>在线客服</b></a>
-                <span class="latency" id="latency-4">延迟: 测试中...</span>
-            </div>
-            <div class="button-container">
-                <a href="https://qm.qq.com/q/yqhXwi231C" class="button" target="_blank"><b>QQ客服</b></a>
-                <span class="latency" id="latency-5">延迟: 测试中...</span>
-            </div>
+            <a href="https://vpp.fenguosuxiaonline.top/" class="button" id="button-1" target="_blank"><b>下单网站 ① - 测试中...</b></a>
+            <a href="https://www.suxavpnonline.shop/" class="button" id="button-2" target="_blank"><b>下单网站 ② - 测试中...</b></a>
+            <a href="http://www.payvpp.top/" class="button" id="button-3" target="_blank"><b>下单网站 ③ - 测试中...</b></a>
+            <a href="https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me" class="button" id="button-4" target="_blank"><b>在线客服 - 测试中...</b></a>
+            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-5" target="_blank"><b>QQ客服 - 测试中...</b></a>
         </div>
     </div>
 </body>
