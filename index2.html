@@ -2,18 +2,24 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Noah">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>禁止微信打开</title>
-    <link href="./css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>禁止微信浏览器打开</title>
+    <script src='./js/disable-devtool.js'></script>
+    <script>
+        DisableDevtool({
+            ondevtoolopen: (type) => {
+                const info = '禁止使用F12开发者工具';
+                alert(info);
+            },
+        });
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
         }
-        .warning, .visible {
+        .warning {
             display: none;
         }
         .visible {
@@ -26,24 +32,38 @@
         .buttons {
             margin: 20px 0;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
+            width: 180px;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 10px;
             font-size: 16px;
             color: #fff;
             background-color: #007bff;
             text-decoration: none;
             border-radius: 5px;
+            text-align: center;
             transition: background-color 0.3s;
         }
         .button:hover {
             background-color: #0056b3;
         }
+        .latency {
+            font-size: 14px;
+            color: #555;
+        }
     </style>
     <script>
         function isWeChatBrowser() {
-            return /micromessenger/i.test(navigator.userAgent);
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
         }
 
         function handleRedirect() {
@@ -51,62 +71,63 @@
                 document.getElementById('warning').classList.add('visible');
             } else {
                 document.getElementById('redirect').classList.add('visible');
+                testLatency(); // 开始测试延迟
             }
+        }
+
+        function testLatency() {
+            const websites = [
+                { url: "https://vpp.fenguosuxiaonline.top/", id: "latency-1" },
+                { url: "https://www.suxavpnonline.shop/", id: "latency-2" },
+                { url: "http://www.payvpp.top/", id: "latency-3" },
+                { url: "https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me", id: "latency-4" },
+                { url: "https://qm.qq.com/q/yqhXwi231C", id: "latency-5" },
+            ];
+
+            websites.forEach(site => {
+                const startTime = performance.now(); // 获取起始时间
+                fetch(site.url, { method: "HEAD", mode: "no-cors" })
+                    .then(() => {
+                        const endTime = performance.now(); // 获取结束时间
+                        const latency = Math.round(endTime - startTime); // 计算延迟
+                        document.getElementById(site.id).innerText = `延迟: ${latency} ms`;
+                    })
+                    .catch(() => {
+                        document.getElementById(site.id).innerText = "延迟: 测试失败";
+                    });
+            });
         }
 
         window.onload = handleRedirect;
     </script>
 </head>
 <body>
-        <div id="warning" class="warning">
+    <div id="warning" class="warning">
         <img src="./img/162.jpg" alt="警告图片">
     </div>
-<div id="all">
-    <div class="wrapper">
-        <div class="main">
-            <br>
-            <div class="content">
-                <div class="content-top">
-                    <div class="box mdui-shadow-3">
-                        <ul class="speedlist">
-                            <li>
-                                <div class="link">
-                                    <div><b>下单网站①</b></div>
-                                    <div class="go"><a href="https://vpp.fenguosuxiaonline.top/" target="_blank">点击进入</a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="link">
-                                    <div><b>下单网站②</b></div>
-                                    <div class="go"><a href="https://www.suxavpnonline.shop/" target="_blank">点击进入</a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="link">
-                                    <div><b>在线客服①</b></div>
-                                    <div class="go"><a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" target="_blank">点击进入</a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="link">
-                                    <div><b>在线客服②</b></div>
-                                    <div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="link">
-                                    <div><b>微信客服</b></div>
-                                    <div class="go"><a href="https://widget-page.smartsupp.com/widget/dfee2da5a9b6731cc56b867e195708f4a33b55b5" target="_blank">点击进入</a></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <div id="redirect" class="warning">
+        <div class="buttons">
+            <div class="button-container">
+                <a href="https://vpp.fenguosuxiaonline.top/" class="button" target="_blank"><b>下单网站 ①</b></a>
+                <span class="latency" id="latency-1">延迟: 测试中...</span>
             </div>
-
-            <!-- 防止默认行为的脚本删除了。保持用户体验的同时，代码更简洁 -->
+            <div class="button-container">
+                <a href="https://www.suxavpnonline.shop/" class="button" target="_blank"><b>下单网站 ②</b></a>
+                <span class="latency" id="latency-2">延迟: 测试中...</span>
+            </div>
+            <div class="button-container">
+                <a href="http://www.payvpp.top/" class="button" target="_blank"><b>下单网站 ③</b></a>
+                <span class="latency" id="latency-3">延迟: 测试中...</span>
+            </div>
+            <div class="button-container">
+                <a href="https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me" class="button" target="_blank"><b>在线客服</b></a>
+                <span class="latency" id="latency-4">延迟: 测试中...</span>
+            </div>
+            <div class="button-container">
+                <a href="https://qm.qq.com/q/yqhXwi231C" class="button" target="_blank"><b>QQ客服</b></a>
+                <span class="latency" id="latency-5">延迟: 测试中...</span>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
