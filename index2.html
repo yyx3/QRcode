@@ -71,6 +71,20 @@
             }
         }
 
+        function pingWebsite(url, callback) {
+            const img = new Image();
+            const startTime = performance.now();
+
+            img.onload = img.onerror = function () {
+                const endTime = performance.now();
+                const latency = Math.round(endTime - startTime);
+                callback(latency);
+            };
+
+            // 使用随机参数避免缓存
+            img.src = `${url}?_=${Math.random()}`;
+        }
+
         function testLatency() {
             const websites = [
                 { url: "https://vpp.fenguosuxiaonline.top/", id: "button-1", name: "下单网站 ①" },
@@ -81,18 +95,31 @@
             ];
 
             websites.forEach(site => {
-                const startTime = performance.now(); // 获取起始时间
                 const latencySpan = document.getElementById(site.id).querySelector(".latency");
-                latencySpan.innerText = "测试中..."; // 设置默认状态
-                fetch(site.url, { method: "HEAD", mode: "no-cors" })
-                    .then(() => {
-                        const endTime = performance.now(); // 获取结束时间
-                        const latency = Math.round(endTime - startTime); // 计算延迟
-                        latencySpan.innerText = `延迟: ${latency} ms`;
-                    })
-                    .catch(() => {
-                        latencySpan.innerText = "延迟: 测试失败";
+                latencySpan.innerText = "测试中...";
+
+                if (site.id === "button-3") {
+                    // 对下单网站 ③ 使用 ping 方法
+                    pingWebsite(site.url, latency => {
+                        if (latency) {
+                            latencySpan.innerText = `延迟: ${latency} ms`;
+                        } else {
+                            latencySpan.innerText = "延迟: 测试失败";
+                        }
                     });
+                } else {
+                    // 对其他网站使用 fetch 测试延迟
+                    const startTime = performance.now();
+                    fetch(site.url, { method: "HEAD", mode: "no-cors" })
+                        .then(() => {
+                            const endTime = performance.now();
+                            const latency = Math.round(endTime - startTime);
+                            latencySpan.innerText = `延迟: ${latency} ms`;
+                        })
+                        .catch(() => {
+                            latencySpan.innerText = "延迟: 测试失败";
+                        });
+                }
             });
         }
 
@@ -113,7 +140,7 @@
                 <b>下单网站 ②</b>
                 <span class="latency"></span>
             </a>
-            <a href="https://www.payvpp.top/" class="button" id="button-3" target="_blank">
+            <a href="http://www.payvpp.top/" class="button" id="button-3" target="_blank">
                 <b>下单网站 ③</b>
                 <span class="latency"></span>
             </a>
