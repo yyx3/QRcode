@@ -34,10 +34,10 @@
         }
         .button {
             display: inline-block;
-            width: 300px; /* 设置按钮宽度以适应延迟文本 */
-            height: 50px;
-            line-height: 50px;
+            width: 300px;
+            height: auto; /* 高度根据内容自动调整 */
             margin: 10px;
+            padding: 10px 0;
             font-size: 16px;
             color: #fff;
             background-color: #007bff;
@@ -48,6 +48,12 @@
         }
         .button:hover {
             background-color: #0056b3;
+        }
+        .latency {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #ffffff;
         }
     </style>
     <script>
@@ -76,14 +82,16 @@
 
             websites.forEach(site => {
                 const startTime = performance.now(); // 获取起始时间
+                const latencySpan = document.getElementById(site.id).querySelector(".latency");
+                latencySpan.innerText = "测试中..."; // 设置默认状态
                 fetch(site.url, { method: "HEAD", mode: "no-cors" })
                     .then(() => {
                         const endTime = performance.now(); // 获取结束时间
                         const latency = Math.round(endTime - startTime); // 计算延迟
-                        document.getElementById(site.id).innerText = `${site.name} - 延迟: ${latency} ms`;
+                        latencySpan.innerText = `延迟: ${latency} ms`;
                     })
                     .catch(() => {
-                        document.getElementById(site.id).innerText = `${site.name} - 延迟: 测试失败`;
+                        latencySpan.innerText = "延迟: 测试失败";
                     });
             });
         }
@@ -97,11 +105,26 @@
     </div>
     <div id="redirect" class="warning">
         <div class="buttons">
-            <a href="https://vpp.fenguosuxiaonline.top/" class="button" id="button-1" target="_blank"><b>下单网站 ① - 测试中...</b></a>
-            <a href="https://www.suxavpnonline.shop/" class="button" id="button-2" target="_blank"><b>下单网站 ② - 测试中...</b></a>
-            <a href="http://www.payvpp.top/" class="button" id="button-3" target="_blank"><b>下单网站 ③ - 测试中...</b></a>
-            <a href="https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me" class="button" id="button-4" target="_blank"><b>在线客服 - 测试中...</b></a>
-            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-5" target="_blank"><b>QQ客服 - 测试中...</b></a>
+            <a href="https://vpp.fenguosuxiaonline.top/" class="button" id="button-1" target="_blank">
+                <b>下单网站 ①</b>
+                <span class="latency"></span>
+            </a>
+            <a href="https://www.suxavpnonline.shop/" class="button" id="button-2" target="_blank">
+                <b>下单网站 ②</b>
+                <span class="latency"></span>
+            </a>
+            <a href="http://www.payvpp.top/" class="button" id="button-3" target="_blank">
+                <b>下单网站 ③</b>
+                <span class="latency"></span>
+            </a>
+            <a href="https://tawk.to/chat/67078bc702d78d1a30ef65d0/1i9qnk1me" class="button" id="button-4" target="_blank">
+                <b>在线客服</b>
+                <span class="latency"></span>
+            </a>
+            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-5" target="_blank">
+                <b>QQ客服</b>
+                <span class="latency"></span>
+            </a>
         </div>
     </div>
 </body>
