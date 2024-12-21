@@ -1,158 +1,75 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>禁止微信浏览器打开</title>
-    <script src='./js/disable-devtool.js'></script>
-    <script>
-        DisableDevtool({
-            ondevtoolopen: (type) => {
-                const info = '禁止使用F12开发者工具';
-                alert(info);
-            },
-        });
-    </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
-        .warning {
-            display: none;
-        }
-        .visible {
-            display: block;
-        }
-        img {
-            width: 100%;
-            height: auto;
-        }
-        .buttons {
-            margin: 20px 0;
-        }
-        .button {
-            display: inline-block;
-            width: 300px;
-            height: auto; /* 高度根据内容自动调整 */
-            margin: 10px;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .latency {
-            display: block;
-            font-size: 14px;
-            margin-top: 5px;
-            color: #ffffff;
-        }
-    </style>
-    <script>
-        function isWeChatBrowser() {
-            var ua = navigator.userAgent.toLowerCase();
-            return ua.indexOf('micromessenger') !== -1;
-        }
-
-        function handleRedirect() {
-            if (isWeChatBrowser()) {
-                document.getElementById('warning').classList.add('visible');
-            } else {
-                document.getElementById('redirect').classList.add('visible');
-                testLatency(); // 开始测试延迟
-            }
-        }
-
-        function pingWebsite(url, callback) {
-            const img = new Image();
-            const startTime = performance.now();
-
-            img.onload = img.onerror = function () {
-                const endTime = performance.now();
-                const latency = Math.round(endTime - startTime);
-                callback(latency);
-            };
-
-            // 使用随机参数避免缓存
-            img.src = `${url}?_=${Math.random()}`;
-        }
-
-        function testLatency() {
-            const websites = [
-                { url: "https://www.helloimg.com/i/2024/12/13/675bdd7e593fb.png", id: "button-1", name: "苹果手机使用教程" },
-                { url: "https://fenguo.zeabur.app/pages/krjc.html", id: "button-2", name: "安卓手机使用教程" },
-                { url: "http://www.payvpp.top/", id: "button-3", name: "MAC电脑使用教程" },
-                { url: "https://fenguo.zeabur.app/pages/krjc.html", id: "button-4", name: "windows电脑使用教程" },
-                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-5", name: "QQ客服" },
-            ];
-
-            websites.forEach(site => {
-                const latencySpan = document.getElementById(site.id).querySelector(".latency");
-                latencySpan.innerText = "测试中...";
-
-                if (site.id === "button-3") {
-                    // 对下单网站 ③ 使用 ping 方法
-                    pingWebsite(site.url, latency => {
-                        if (latency) {
-                            latencySpan.innerText = `延迟: ${latency} ms`;
-                        } else {
-                            latencySpan.innerText = "延迟: 测试失败";
-                        }
-                    });
-                } else {
-                    // 对其他网站使用 fetch 测试延迟
-                    const startTime = performance.now();
-                    fetch(site.url, { method: "HEAD", mode: "no-cors" })
-                        .then(() => {
-                            const endTime = performance.now();
-                            const latency = Math.round(endTime - startTime);
-                            latencySpan.innerText = `延迟: ${latency} ms`;
-                        })
-                        .catch(() => {
-                            latencySpan.innerText = "延迟: 测试失败";
-                        });
-                }
-            });
-        }
-
-        window.onload = handleRedirect;
-    </script>
-</head>
-<body>
-    <div id="warning" class="warning">
-        <img src="./img/162.jpg" alt="警告图片">
-    </div>
-    <div id="redirect" class="warning">
-        <div class="buttons">
-            <a href="https://www.helloimg.com/i/2024/12/13/675bdd7e593fb.png" class="button" id="button-1" target="_blank">
-                <b>苹果手机使用教程</b>
-                <span class="latency"></span>
-            </a>
-            <a href="https://fenguo.zeabur.app/pages/krjc.html" class="button" id="button-2" target="_blank">
-                <b>安卓手机使用教程</b>
-                <span class="latency"></span>
-            </a>
-            <a href="https://www.payvpp.top/" class="button" id="button-3" target="_blank">
-                <b>MAC电脑使用教程</b>
-                <span class="latency"></span>
-            </a>
-            <a href="https://fenguo.zeabur.app/pages/krjc.html" class="button" id="button-4" target="_blank">
-                <b>win电脑使用教程</b>
-                <span class="latency"></span>
-            </a>
-            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-5" target="_blank">
-                <b>安卓&win电脑软件</b>
-                <span class="latency"></span>
-            </a>
-        </div>
-    </div>
-</body>
+<html lang="zh">
+	<head>
+		<meta charSet="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="./css/ab32664529ebff6a.css" crossorigin="" data-precedence="next" />
+		<link rel="stylesheet" href="./css/19e8bb2190bce99d.css" crossorigin="" data-precedence="next" />
+		<title>疯果科技 | 导航</title>
+				<script src='./js/disable-devtool.js'></script>
+		<script>
+			DisableDevtool({
+				ondevtoolopen: (type) => {
+					const info = '禁止使用F12开发者工具';
+					alert(info);
+				},
+			})
+		</script>
+		<script src="./js/script.js"></script>
+		<meta name="description" content="疯果科技" />
+		<link rel="icon" href="./images/feng.ico" type="image/x-icon" sizes="16x16" />
+		<meta name="next-size-adjust" />
+	</head>
+	<body class="__className_aaf875">
+		<main class="flex min-h-screen flex-col items-center gap-5 p-5 bg-violet-400">
+			<div class="bg-violet-500 w-5/6 rounded-2xl p-2 pl-5">
+				<h2 class="text-slate-300" style="font-size: 20px;">
+					<b style="display: inline;">疯果科技</b>
+				</h2>
+				<div class="flex flex-wrap gap-2 p-6">
+					<div class="flex flex-col gap-2 text-white">
+						<div><b>永不失联，为了自由的网络🪜🧱</b></div>
+					</div>
+				</div>
+			</div>
+			<!-- 模块四 -->
+			<div class="bg-violet-500 w-5/6 rounded-2xl p-2 pl-5">
+				<h2 class="text-slate-300" style="font-size: 20px;">iPhone教程</h2>
+				<div class="flex flex-wrap gap-2 p-6">
+					<div class="flex gap-3">
+						<div class="flex rounded-2xl p-2 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300"
+							style="background-color:white">
+							<div class="m-auto" style="color:blue" onclick="window.location.href='https://www.helloimg.com/i/2024/12/13/675bdd7e593fb.png'">
+								iPhone使用教程</div>
+						</div>
+					</div>
+					<div class="flex gap-3">
+						<div class="flex rounded-2xl p-2 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300"
+							style="background-color:white" type="button" aria-haspopup="dialog" aria-expanded="false"
+							aria-controls="radix-:R5rbqla:" data-state="closed">
+							<div class="m-auto" style="color:blue" onclick="window.location.href='./pages/guize.html'">
+								小火箭账号登录教程</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-wrap gap-2 p-6">
+				<div class="flex gap-3">
+					<div class="flex rounded-2xl p-2 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300"
+						style="background-color:white">
+						<div class="m-auto" style="color:blue; cursor:pointer;"
+							onclick="window.location.href='https://mp.weixin.qq.com/mp/homepage?__biz=Mzg4NDY4Mjc0MQ==&hid=1&sn=424b20d2aaca3f4706837fad026618c4'">iPhone快捷指令集合</div>
+					</div>
+				</div>
+				<div class="flex gap-3">
+					<div class="flex rounded-2xl p-2 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300"
+						style="background-color:white">
+						<div class="m-auto" style="color:blue; cursor:pointer;"
+							onclick="window.location.href='./pages/shadowrocket.html'">S</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<!-- end -->
+		</main>
+	</body>
 </html>
