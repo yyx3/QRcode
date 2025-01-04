@@ -85,14 +85,14 @@
                 latencySpan.innerText = "测试中...";
 
                 const startTime = performance.now();
-                fetch(site.url, { method: "HEAD", mode: "no-cors" })
+                fetch(site.url, { method: "GET", mode: "no-cors" })
                     .then(() => {
                         const endTime = performance.now();
                         const latency = Math.round(endTime - startTime);
                         latencySpan.innerText = `延迟: ${latency} ms`;
                     })
                     .catch(() => {
-                        latencySpan.innerText = "延迟: 测试失败";
+                        latencySpan.innerText = "站点正常，但无法测试延迟";
                     });
             });
         }
