@@ -35,7 +35,7 @@
         .button {
             display: inline-block;
             width: 300px;
-            height: auto; /* 高度根据内容自动调整 */
+            height: auto;
             margin: 10px;
             padding: 10px 0;
             font-size: 16px;
@@ -62,68 +62,57 @@
             return ua.indexOf('micromessenger') !== -1;
         }
 
-        function handleRedirect() {
-            if (isWeChatBrowser()) {
-                document.getElementById('warning').classList.add('visible');
-            } else {
-                document.getElementById('redirect').classList.add('visible');
-                testLatency(); // 开始测试延迟
+        async function testLatency(url, latencySpan) {
+            try {
+                latencySpan.innerText = "测试中...";
+                const startTime = performance.now();
+
+                // 设置超时机制
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                await fetch(url, { method: "HEAD", mode: "no-cors", signal: controller.signal });
+                const endTime = performance.now();
+
+                clearTimeout(timeoutId); // 清除超时
+
+                const latency = Math.round(endTime - startTime);
+                latencySpan.innerText = `延迟: ${latency} ms`;
+            } catch (err) {
+                latencySpan.innerText = "延迟: 测试失败";
             }
         }
 
-        function pingWebsite(url, callback) {
-            const img = new Image();
-            const startTime = performance.now();
-
-            img.onload = img.onerror = function () {
-                const endTime = performance.now();
-                const latency = Math.round(endTime - startTime);
-                callback(latency);
-            };
-
-            // 使用随机参数避免缓存
-            img.src = `${url}?_=${Math.random()}`;
-        }
-
-        function testLatency() {
+        function testLatencyForAll() {
             const websites = [
-                { url: "https://vpp.fenguosuxiaonline.top/", id: "button-1", name: "下单网站 ①" },
-                { url: "http://www.payvpp.top/", id: "button-2", name: "下单网站 ②" },
-                { url: "https://www.fengguo.top/", id: "button-3", name: "下单网站 ③" },
-                { url: "https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn", id: "button-4", name: "在线客服" },
-                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-5", name: "QQ客服" },
+                { url: "https://vpp.fenguosuxiaonline.top/", id: "button-1", specialLatency: null },
+                { url: "http://www.payvpp.top/", id: "button-2", specialLatency: 150 },
+                { url: "https://www.fengguo.top/", id: "button-3", specialLatency: null },
+                { url: "https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn", id: "button-4", specialLatency: null },
+                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-5", specialLatency: null },
             ];
 
             websites.forEach(site => {
                 const latencySpan = document.getElementById(site.id).querySelector(".latency");
-                latencySpan.innerText = "测试中...";
 
-                if (site.id === "button-0") {
-                    // 对下单网站 ③ 使用 ping 方法
-                    pingWebsite(site.url, latency => {
-                        if (latency) {
-                            latencySpan.innerText = `延迟: ${latency} ms`;
-                        } else {
-                            latencySpan.innerText = "延迟: 测试失败";
-                        }
-                    });
+                if (site.specialLatency !== null) {
+                    // 如果有特殊延迟值，直接显示
+                    latencySpan.innerText = `延迟: ${site.specialLatency} ms`;
                 } else {
-                    // 对其他网站使用 fetch 测试延迟
-                    const startTime = performance.now();
-                    fetch(site.url, { method: "HEAD", mode: "no-cors" })
-                        .then(() => {
-                            const endTime = performance.now();
-                            const latency = Math.round(endTime - startTime);
-                            latencySpan.innerText = `延迟: ${latency} ms`;
-                        })
-                        .catch(() => {
-                            latencySpan.innerText = "延迟: 测试失败";
-                        });
+                    // 否则测试实际延迟
+                    testLatency(site.url, latencySpan);
                 }
             });
         }
 
-        window.onload = handleRedirect;
+        window.onload = () => {
+            if (isWeChatBrowser()) {
+                document.getElementById('warning').classList.add('visible');
+            } else {
+                document.getElementById('redirect').classList.add('visible');
+                testLatencyForAll(); // 开始测试延迟
+            }
+        };
     </script>
 </head>
 <body>
@@ -138,7 +127,7 @@
             </a>
             <a href="http://www.payvpp.top/" class="button" id="button-2" target="_blank">
                 <b>下单网站 ②</b>
-                <span class="latency"></span>
+                <span class="latency">延迟: 150 ms</span>
             </a>
             <a href="https://www.fengguo.top/" class="button" id="button-3" target="_blank">
                 <b>下单网站 ③</b>
@@ -152,7 +141,7 @@
                 <b>QQ客服</b>
                 <span class="latency"></span>
             </a>
-            <a href="course.html" class="button" id="button-5" target="_blank">
+            <a href="course.html" class="button" id="button-6" target="_blank">
                 <b>使用教程</b>
                 <span class="latency"></span>
             </a>
