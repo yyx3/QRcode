@@ -98,7 +98,7 @@
                 const latencySpan = document.getElementById(site.id).querySelector(".latency");
                 latencySpan.innerText = "测试中...";
 
-                if (site.id === "button-2") {
+                if (site.id === "button-0") {
                     // 对下单网站 ③ 使用 ping 方法
                     pingWebsite(site.url, latency => {
                         if (latency) {
