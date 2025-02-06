@@ -85,11 +85,12 @@
 
         function testLatencyForAll() {
             const websites = [
-                { url: "https://cdn.apnfenguo.top/", id: "button-1", specialLatency: null },
-                { url: "https://apn.payvpp.top/", id: "button-2", specialLatency: 265 },
-                { url: "https://www.fengguo.top/", id: "button-3", specialLatency: null },
-                { url: "https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn", id: "button-4", specialLatency: null },
-                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-5", specialLatency: null },
+                { url: "https://ap.apnfenguo.top/", id: "button-1", specialLatency: null },
+                { url: "https://cdn.apnfenguo.top/", id: "button-2", specialLatency: null },
+                { url: "https://apn.payvpp.top/", id: "button-3", specialLatency: 265 },
+                { url: "https://www.fengguo.top/", id: "button-4", specialLatency: null },
+                { url: "https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn", id: "button-5", specialLatency: null },
+                { url: "https://qm.qq.com/q/yqhXwi231C", id: "button-6", specialLatency: null },
             ];
 
             websites.forEach(site => {
@@ -121,27 +122,31 @@
     </div>
     <div id="redirect" class="warning">
         <div class="buttons">
-            <a href="https://cdn.apnfenguo.top/" class="button" id="button-1" target="_blank">
+            <a href="https://ap.apnfenguo.top/" class="button" id="button-1" target="_blank">
                 <b>下单网站 ①</b>
                 <span class="latency"></span>
             </a>
-            <a href="https://apn.payvpp.top/" class="button" id="button-2" target="_blank">
+            <a href="https://cdn.apnfenguo.top/" class="button" id="button-2" target="_blank">
                 <b>下单网站 ②</b>
-                <span class="latency">延迟: 265 ms</span>
-            </a>
-            <a href="https://www.fengguo.top/" class="button" id="button-3" target="_blank">
-                <b>下单网站 ③</b>
                 <span class="latency"></span>
             </a>
-            <a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" class="button" id="button-4" target="_blank">
+            <a href="https://apn.payvpp.top/" class="button" id="button-3" target="_blank">
+                <b>下单网站 ③</b>
+                <span class="latency">延迟: 265 ms</span>
+            </a>
+            <a href="https://www.fengguo.top/" class="button" id="button-4" target="_blank">
+                <b>下单网站 ④</b>
+                <span class="latency"></span>
+            </a>
+            <a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" class="button" id="button-5" target="_blank">
                 <b>在线客服</b>
                 <span class="latency"></span>
             </a>
-            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-5" target="_blank">
+            <a href="https://qm.qq.com/q/yqhXwi231C" class="button" id="button-6" target="_blank">
                 <b>QQ客服</b>
                 <span class="latency"></span>
             </a>
-            <a href="course.html" class="button" id="button-6" target="_blank">
+            <a href="course.html" class="button" id="button-7" target="_blank">
                 <b>使用教程</b>
                 <span class="latency"></span>
             </a>
