@@ -28,7 +28,7 @@ jobs:
     - name: 查看文件状态  # 调试文件状态
       run: |
         git status
-        ls -la ./num
+        ls -la ./shuzi
 
     - name: Commit 和 Push  # 提交更改并推送到远程仓库
       run: |
