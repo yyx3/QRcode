@@ -23,12 +23,12 @@ jobs:
         python-version: '3.x'  # 使用 Python 3.x 版本
       
     - name: 自动提交  # 执行 Python 脚本
-      run: python ./daoqi/auto.py  # 运行 Python 脚本
+      run: python ./num/auto.py  # 运行 Python 脚本
 
     - name: 查看文件状态  # 调试文件状态
       run: |
         git status
-        ls -la ./yonghu
+        ls -la ./num
 
     - name: Commit 和 Push  # 提交更改并推送到远程仓库
       run: |
