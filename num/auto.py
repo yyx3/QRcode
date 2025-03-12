@@ -1,4 +1,4 @@
-file_path = "mub"
+file_path = "./shuzi/mub"
 
 try:
     with open(file_path, "r") as file:
