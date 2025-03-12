@@ -1,4 +1,4 @@
-file_path = "auto.txt"
+file_path = "mub"
 
 try:
     with open(file_path, "r") as file:
