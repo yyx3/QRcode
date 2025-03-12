@@ -1,39 +1,42 @@
 name: 自动提交
 
-# 触发条件
 on:
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
   schedule:
-    - cron: "0 */8 * * *"  # 每 8 小时运行一次
+    - cron: "0 */8 * * *"
 
-env:  # 设置环境变量
-  TZ: Asia/Shanghai  # 设置时区为亚洲/上海
+env:
+  TZ: Asia/Shanghai
 
 jobs:
-  deploy:  # 部署任务
-    runs-on: ubuntu-latest  # 在最新版的 Ubuntu 上运行
+  deploy:
+    runs-on: ubuntu-latest
     
-    steps:  # 步骤        
-    - name: 迁出代码  # 使用 actions/checkout 操作获取代码
+    steps:        
+    - name: 迁出代码
       uses: actions/checkout@v3
 
-    - name: 安装 Python  # 使用 actions/setup-python 操作设置 Python 环境
+    - name: 安装 Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'  # 使用 Python 3.x 版本
-      
-    - name: 自动提交  # 执行 Python 脚本
-      run: python ./num/auto.py  # 运行 Python 脚本
+        python-version: '3.x'
 
-    - name: 查看文件状态  # 调试文件状态
+    - name: 自动提交
+      run: python ./num/auto.py
+
+    - name: 查看文件状态
       run: |
         git status
         ls -la ./shuzi
+        git diff
 
-    - name: Commit 和 Push  # 提交更改并推送到远程仓库
+    - name: 修正权限
+      run: chmod -R 777 shuzi
+
+    - name: Commit 和 Push
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add -A  # 添加所有更改
+        git add shuzi/*
         git commit -m "更新时间 $(date '+%Y-%m-%d %H:%M:%S')" || echo "没有更改需要提交"
-        git push origin master || echo "没有更改需要推送"
+        git push origin main || echo "没有更改需要推送"
