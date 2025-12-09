@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>疯果VPP</title>
-  
+
   <script>
     (function() {
       var ua = navigator.userAgent.toLowerCase();
       var isWeChat = ua.includes('micromessenger');
       var isQQ = ua.includes('qq/') || ua.includes('mqqbrowser') || ua.includes('qqbrowser');
-      
+
       if (isWeChat || isQQ) {
         // 如果是内嵌浏览器，立即覆盖页面内容为提示页
         document.write(`
@@ -85,7 +85,7 @@
       --accent-soft: #e5edff;
     }
     * { box-sizing: border-box; }
-    body { 
+    body {
       font-family: "PingFang SC", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
       margin: 0; min-height: 100vh;
       background: radial-gradient(circle at top, #e5edff 0%, #f9fafb 60%, #e5e7eb 100%);
@@ -109,7 +109,14 @@
     .nav-item:active { transform: scale(0.98); box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14); }
     .nav-content { display: flex; align-items: center; gap: 12px; }
     .nav-icon { width: 32px; height: 32px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .nav-text-main { font-size: 15px; font-weight: 500; }
+    /* ------------- 方案 A：保持“下单网站”与序号水平、垂直居中 ------------- */
+    .nav-text-main {
+      display: inline-flex;
+      align-items: center; /* 垂直居中：方案 A */
+      gap: 6px;            /* 文字与序号间距 */
+      font-size: 15px;
+      font-weight: 500;
+    }
     .nav-text-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
     .nav-right { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
     .latency-label { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: #eef2ff; color: #4f46e5; }
@@ -120,19 +127,17 @@
     .footer-btn { padding: 12px 24px; font-size: 16px; color: var(--text-secondary); background: #f9fafb; border-radius: 999px; text-decoration: none; border: 1px solid rgba(209, 213, 219, 0.9); transition: all 0.2s; }
     .footer-btn:hover { background: #e5edff; color: #111827; border-color: #93c5fd; }
 
-    /* ========== 新增：line-number（序号）样式 ========== */
-    /* 数字样式：更大、更粗、响应式 */
+    /* ====== 序号样式（方案 A） ====== */
     .line-number {
       display: inline-block;
-      font-size: clamp(16px, 3.5vw, 20px); /* 最小18px，最大28px，中间随屏幕缩放 */
+      font-size: clamp(15px, 3.5vw, 19px); /* 最小18px，最大28px */
       font-weight: 700;
       line-height: 1;
-      margin-left: 6px;         /* 数字和文字间距 */
-      vertical-align: baseline; /* 与文字基线对齐，调整为看起来更自然 */
-      transform: translateY(-1px); /* 微调垂直位置（按需增减或删掉） */
-      color: inherit;           /* 使用父元素文字颜色 */
+      margin-left: 0;        /* 使用 gap 管理间距 */
+      vertical-align: middle;
+      color: inherit;
+      transform: none;       /* 不使用 translateY 微调，靠 align-items: center 对齐 */
     }
-    /* 如果想对某一项强调颜色，可加 .emphasize */
     .line-number.emphasize { color: #111827; }
 
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
@@ -157,7 +162,7 @@
           <div class="nav-icon">⚡️</div>
           <div>
             <div class="nav-text-main">下单网站 <span class="line-number">①</span></div>
-            <!-- <div class="nav-text-sub">优先推荐 · 较高成功率</div> -->
+            <div class="nav-text-sub">优先推荐 · 较高成功率</div>
           </div>
         </div>
         <div class="nav-right">
@@ -172,7 +177,7 @@
           <div class="nav-icon">💎</div>
           <div>
             <div class="nav-text-main">下单网站 <span class="line-number">②</span></div>
-            <!-- <div class="nav-text-sub">线路优化 · 稳定性更佳</div> -->
+            <div class="nav-text-sub">线路优化 · 稳定性更佳</div>
           </div>
         </div>
         <div class="nav-right">
@@ -187,7 +192,7 @@
           <div class="nav-icon">🛡️</div>
           <div>
             <div class="nav-text-main">下单网站 <span class="line-number">③</span></div>
-            <!-- <div class="nav-text-sub">前两条无法使用时再尝试</div> -->
+            <div class="nav-text-sub">前两条无法使用时再尝试</div>
           </div>
         </div>
         <div class="nav-right">
@@ -271,5 +276,3 @@
   </script>
 </body>
 </html>
-
-
