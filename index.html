@@ -109,14 +109,19 @@
     .nav-item:active { transform: scale(0.98); box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14); }
     .nav-content { display: flex; align-items: center; gap: 12px; }
     .nav-icon { width: 32px; height: 32px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    /* ------------- 方案 A：保持“下单网站”与序号水平、垂直居中 ------------- */
+
+    /* ------------- 调整：保持“下单网站”文字基线与序号基线对齐 ------------- */
     .nav-text-main {
       display: inline-flex;
-      align-items: center; /* 垂直居中：方案 A */
+      align-items: baseline; /* 使用 baseline 对齐，保证文字与数字的基线一致 */
       gap: 6px;            /* 文字与序号间距 */
       font-size: 15px;
       font-weight: 500;
+      line-height: 1;      /* 统一行高，避免基线偏差 */
     }
+    /* 子元素（文本与序号）都保证以 baseline 对齐 */
+    .nav-text-main > * { vertical-align: baseline; }
+
     .nav-text-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
     .nav-right { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
     .latency-label { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: #eef2ff; color: #4f46e5; }
@@ -127,16 +132,32 @@
     .footer-btn { padding: 12px 24px; font-size: 16px; color: var(--text-secondary); background: #f9fafb; border-radius: 999px; text-decoration: none; border: 1px solid rgba(209, 213, 219, 0.9); transition: all 0.2s; }
     .footer-btn:hover { background: #e5edff; color: #111827; border-color: #93c5fd; }
 
-    /* ====== 序号样式（方案 A） ====== */
+    /* ====== 设计级序号组件（替代 ①②③） ======
+    .num-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.3em;
+      height: 1.3em;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      font-size: .78em;
+      font-weight: 700;
+      line-height: 1;
+      transform: translateY(-0.02em);
+      box-sizing: border-box;
+    }
+
+（微调以匹配基线） ====== */
     .line-number {
       display: inline-block;
-      font-size: clamp(15px, 3.5vw, 19px); /* 最小18px，最大28px */
+      font-size: clamp(15px, 3.5vw, 19px);
       font-weight: 700;
       line-height: 1;
       margin-left: 0;        /* 使用 gap 管理间距 */
-      vertical-align: middle;
+      vertical-align: baseline; /* 确保与文字基线一致 */
       color: inherit;
-      transform: none;       /* 不使用 translateY 微调，靠 align-items: center 对齐 */
+      transform: none;       /* 不使用 translateY 微调，靠 baseline 对齐 */
     }
     .line-number.emphasize { color: #111827; }
 
@@ -161,7 +182,7 @@
         <div class="nav-content">
           <div class="nav-icon">⚡️</div>
           <div>
-            <div class="nav-text-main">下单网站 <span class="line-number">①</span></div>
+            <div class="nav-text-main">下单网站 <span class="num-circle">1</span></div>
             <div class="nav-text-sub">优先推荐 · 较高成功率</div>
           </div>
         </div>
@@ -176,7 +197,7 @@
         <div class="nav-content">
           <div class="nav-icon">💎</div>
           <div>
-            <div class="nav-text-main">下单网站 <span class="line-number">②</span></div>
+            <div class="nav-text-main">下单网站 <span class="num-circle">2</span></div>
             <div class="nav-text-sub">线路优化 · 稳定性更佳</div>
           </div>
         </div>
@@ -191,7 +212,7 @@
         <div class="nav-content">
           <div class="nav-icon">🛡️</div>
           <div>
-            <div class="nav-text-main">下单网站 <span class="line-number">③</span></div>
+            <div class="nav-text-main">下单网站 <span class="num-circle">3</span></div>
             <div class="nav-text-sub">前两条无法使用时再尝试</div>
           </div>
         </div>
