@@ -119,6 +119,22 @@
     .footer-links { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s backwards; }
     .footer-btn { padding: 12px 24px; font-size: 16px; color: var(--text-secondary); background: #f9fafb; border-radius: 999px; text-decoration: none; border: 1px solid rgba(209, 213, 219, 0.9); transition: all 0.2s; }
     .footer-btn:hover { background: #e5edff; color: #111827; border-color: #93c5fd; }
+
+    /* ========== 新增：line-number（序号）样式 ========== */
+    /* 数字样式：更大、更粗、响应式 */
+    .line-number {
+      display: inline-block;
+      font-size: clamp(18px, 3.5vw, 28px); /* 最小18px，最大28px，中间随屏幕缩放 */
+      font-weight: 700;
+      line-height: 1;
+      margin-left: 6px;         /* 数字和文字间距 */
+      vertical-align: baseline; /* 与文字基线对齐，调整为看起来更自然 */
+      transform: translateY(-1px); /* 微调垂直位置（按需增减或删掉） */
+      color: inherit;           /* 使用父元素文字颜色 */
+    }
+    /* 如果想对某一项强调颜色，可加 .emphasize */
+    .line-number.emphasize { color: #111827; }
+
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 360px) { body { padding-top: 30px; } .nav-item { padding-inline: 14px; } }
@@ -140,7 +156,7 @@
         <div class="nav-content">
           <div class="nav-icon">⚡️</div>
           <div>
-            <div class="nav-text-main">极速通道 ①</div>
+            <div class="nav-text-main">下单网站 <span class="line-number">①</span></div>
             <div class="nav-text-sub">优先推荐 · 较高成功率</div>
           </div>
         </div>
@@ -155,7 +171,7 @@
         <div class="nav-content">
           <div class="nav-icon">💎</div>
           <div>
-            <div class="nav-text-main">备用通道 ②</div>
+            <div class="nav-text-main">下单网站 <span class="line-number">②</span></div>
             <div class="nav-text-sub">线路优化 · 稳定性更佳</div>
           </div>
         </div>
@@ -170,7 +186,7 @@
         <div class="nav-content">
           <div class="nav-icon">🛡️</div>
           <div>
-            <div class="nav-text-main">备用通道 ③</div>
+            <div class="nav-text-main">下单网站 <span class="line-number">③</span></div>
             <div class="nav-text-sub">前两条无法使用时再尝试</div>
           </div>
         </div>
