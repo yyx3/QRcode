@@ -9,7 +9,7 @@
     (function() {
       var ua = navigator.userAgent.toLowerCase();
       var isWeChat = ua.includes('micromessenger');
-      var isQQ = ua.includes('qq/') || ua.includes('mqqbrowser') || ua.includes('qqbrowser');
+      var isQQ = ua.includes('qq/') || ua.includes('QQTheme') || ua.includes('qqbrowser');
 
       if (isWeChat || isQQ) {
         // 如果是内嵌浏览器，立即覆盖页面内容为提示页
@@ -313,4 +313,5 @@
   </script>
 </body>
 </html>
+
 
