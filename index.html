@@ -4,15 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>疯果VPP</title>
-
   <script>
     (function() {
       var ua = navigator.userAgent.toLowerCase();
       var isWeChat = ua.includes('micromessenger');
       var isQQ = ua.includes('qq/') || ua.includes('QQTheme') || ua.includes('qqbrowser');
-
       if (isWeChat || isQQ) {
-        // 如果是内嵌浏览器，立即覆盖页面内容为提示页
         document.write(`
           <!DOCTYPE html>
           <html lang="zh-CN">
@@ -68,12 +65,10 @@
           </html>
         `);
         document.close();
-        // 阻止后续页面渲染
         throw new Error("Redirected to warning page");
       }
     })();
   </script>
-
   <style>
     :root {
       --bg: #f3f4f6;
@@ -109,19 +104,15 @@
     .nav-item:active { transform: scale(0.98); box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14); }
     .nav-content { display: flex; align-items: center; gap: 12px; }
     .nav-icon { width: 32px; height: 32px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-
-    /* ------------- 调整：保持“下单网站”文字基线与序号基线对齐 ------------- */
     .nav-text-main {
       display: inline-flex;
-      align-items: baseline; /* 使用 baseline 对齐，保证文字与数字的基线一致 */
-      gap: 6px;            /* 文字与序号间距 */
+      align-items: baseline;
+      gap: 6px;
       font-size: 15px;
       font-weight: 500;
-      line-height: 1;      /* 统一行高，避免基线偏差 */
+      line-height: 1;
     }
-    /* 子元素（文本与序号）都保证以 baseline 对齐 */
     .nav-text-main > * { vertical-align: baseline; }
-
     .nav-text-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
     .nav-right { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
     .latency-label { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: #eef2ff; color: #4f46e5; }
@@ -131,36 +122,23 @@
     .footer-links { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s backwards; }
     .footer-btn { padding: 12px 24px; font-size: 16px; color: var(--text-secondary); background: #f9fafb; border-radius: 999px; text-decoration: none; border: 1px solid rgba(209, 213, 219, 0.9); transition: all 0.2s; }
     .footer-btn:hover { background: #e5edff; color: #111827; border-color: #93c5fd; }
-
-    /* ====== 设计级序号组件（替代 ①②③） ======
+    .line-number { display: inline-block; font-size: clamp(15px, 3.5vw, 19px); font-weight: 700; line-height: 1; margin-left: 0; vertical-align: baseline; color: inherit; transform: none; }
+    
+    /* 新增：圆圈序号样式（适配你当前的 num-circle） */
     .num-circle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.3em;
-      height: 1.3em;
+      width: 22px;
+      height: 22px;
+      background: #e5edff;
+      color: #4f46e5;
+      font-size: 13.5px;
+      font-weight: 700;
       border-radius: 50%;
-      border: 2px solid currentColor;
-      font-size: .78em;
-      font-weight: 700;
       line-height: 1;
-      transform: translateY(-0.02em);
-      box-sizing: border-box;
+      min-width: 22px;
     }
-
-（微调以匹配基线） ====== */
-    .line-number {
-      display: inline-block;
-      font-size: clamp(15px, 3.5vw, 19px);
-      font-weight: 700;
-      line-height: 1;
-      margin-left: 0;        /* 使用 gap 管理间距 */
-      vertical-align: baseline; /* 确保与文字基线一致 */
-      color: inherit;
-      transform: none;       /* 不使用 translateY 微调，靠 baseline 对齐 */
-    }
-    .line-number.emphasize { color: #111827; }
-
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 360px) { body { padding-top: 30px; } .nav-item { padding-inline: 14px; } }
@@ -168,14 +146,12 @@
 </head>
 <body>
   <div class="noise-layer"></div>
-
   <div class="container">
     <header>
       <div class="title-pill">疯果VPP · 安全导航</div>
       <h1>选择下单通道</h1>
       <div class="subtitle">已为你自动测试当前网络下各通道延迟，优先使用推荐线路</div>
     </header>
-
     <div class="nav-group">
       <a href="https://ap.apnfenguo.top/" class="nav-item" target="_blank" data-line-id="line1">
         <span class="tag-recommend" data-tag-for="line1">推荐</span>
@@ -191,7 +167,6 @@
           <div class="nav-arrow">›</div>
         </div>
       </a>
-
       <a href="https://www.payvpp.top/" class="nav-item" target="_blank" data-line-id="line2">
         <span class="tag-recommend" data-tag-for="line2">推荐</span>
         <div class="nav-content">
@@ -206,8 +181,7 @@
           <div class="nav-arrow">›</div>
         </div>
       </a>
-
-    <a href="https://d12hxyad88hkqn.cloudfront.net/" class="nav-item" target="_blank" data-line-id="line3">
+      <a href="https://d12hxyad88hkqn.cloudfront.net/" class="nav-item" target="_blank" data-line-id="line3">
         <span class="tag-recommend" data-tag-for="line3">推荐</span>
         <div class="nav-content">
           <div class="nav-icon">⚡️</div>
@@ -221,7 +195,6 @@
           <div class="nav-arrow">›</div>
         </div>
       </a>
-
       <a href="https://app.fengguo.top/" class="nav-item" target="_blank" data-line-id="line4">
         <span class="tag-recommend" data-tag-for="line4">推荐</span>
         <div class="nav-content">
@@ -237,7 +210,6 @@
         </div>
       </a>
     </div>
-
     <div class="footer-links">
       <a href="https://tawk.to/chat/66addd061601a2195ba04b79/1i4bieonn" class="footer-btn" target="_blank">在线客服</a>
       <a href="/course.html" class="footer-btn" target="_blank">使用教程</a>
@@ -245,7 +217,7 @@
   </div>
 
   <script>
-    // 3. 延迟测试逻辑 (保留原逻辑)
+    // 延迟测试逻辑（已优化为 4 条线路同时全并发）
     (function () {
       console.log('Payment center page loaded');
       const lines = [
@@ -254,27 +226,41 @@
         { id: 'line3', url: 'https://d12hxyad88hkqn.cloudfront.net/' },
         { id: 'line4', url: 'https://app.fengguo.top/' },
       ];
+      const TIMEOUT_MS = 2500;
 
-      function testLatency(line) {
+      async function testLatency(line) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
         const start = performance.now();
-        // 仅探测连通性，mode: 'no-cors'
-        return fetch(line.url, { method: 'GET', mode: 'no-cors', cache: 'no-store' })
-          .catch(() => null)
-          .then(() => {
-            const end = performance.now();
-            const latency = Math.round(end - start);
-            if (!isFinite(latency) || latency <= 0) return null;
-            return latency;
+        try {
+          const separator = line.url.includes('?') ? '&' : '?';
+          const testUrl = line.url + separator + '_t=' + Date.now();
+          await fetch(testUrl, {
+            method: 'GET',
+            mode: 'no-cors',
+            cache: 'no-store',
+            signal: controller.signal
           });
+          const end = performance.now();
+          const latency = Math.round(end - start);
+          return latency > 0 ? latency : null;
+        } catch (err) {
+          return null;
+        } finally {
+          clearTimeout(timeoutId);
+        }
       }
 
       async function runTests() {
         const results = {};
+
+        // 初始化所有标签为“测试中…”
         for (const line of lines) {
           const el = document.querySelector('[data-latency-id="' + line.id + '"]');
           if (el) el.textContent = '测试中…';
         }
 
+        // === 核心修改：4条线路同时全并发测速 ===
         await Promise.all(lines.map(async (line) => {
           const latency = await testLatency(line);
           results[line.id] = latency;
@@ -288,13 +274,23 @@
             labelEl.style.color = '#b91c1c';
           } else {
             labelEl.textContent = latency + ' ms';
+            
+            if (latency < 200) {
+              labelEl.style.background = '#d1fae5';
+              labelEl.style.color = '#059669';
+            } else if (latency < 600) {
+              labelEl.style.background = '#fef3c7';
+              labelEl.style.color = '#d97706';
+            } else {
+              labelEl.style.background = '#eef2ff';
+              labelEl.style.color = '#4f46e5';
+            }
           }
         }));
 
-        // 选出最优线路
+        // 选出最优线路并标记推荐
         const validLatencies = Object.entries(results).filter(([_, v]) => v !== null);
         if (validLatencies.length === 0) return;
-
         validLatencies.sort((a, b) => a[1] - b[1]);
         const bestId = validLatencies[0][0];
 
@@ -313,5 +309,3 @@
   </script>
 </body>
 </html>
-
-
